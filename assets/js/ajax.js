@@ -6,9 +6,7 @@ function get_messages(){
     }).then((messages)=>{
         const boxMessages = document.querySelector('#messages')
         const cookies= document.cookie.split("; ")
-
-        let pseudoCookie =  cookies[0].split('=')[1]
-
+        let pseudoCookie = cookies[0].split('=')[1]
         // console.log(pseudoCookie)
 
         boxMessages.innerHTML = ""
@@ -52,5 +50,12 @@ form.addEventListener('submit', function(event){
     fetch('./process/process_add_user_message.php', {
         method:"POST",
         body: formData
+    }).then((response)=>{
+        return response.json();
+    }).then((data)=>{
+        console.log(data);
+        if (data.status === 401) {
+           return window.location.href = './login.php'
+        }
     })
 })
