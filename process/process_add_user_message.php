@@ -48,7 +48,12 @@ if (!empty($_POST['pseudo'])
             date("Y-m-d H:i:s")
         ]);
 
-        header('Location: ../index.php?success=Le message à bien été enregistré');
+        // Créer un cookie pour engegistrer le pseudode l'utilisateur
+
+        setcookie('pseudo', $_POST['pseudo'], time()+3600, '/');
+        setcookie('message', $_POST['message'], time()+3600, '/');
+
+        // header('Location: ../index.php?success=Le message à bien été enregistré');
 }else{
-    header('Location: ../index.php?error=Problème lors de l\'enregistrement du message');
+    // header('Location: ../index.php?error=Problème lors de l\'enregistrement du message');
 }
